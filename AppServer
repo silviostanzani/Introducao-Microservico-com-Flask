@@ -1,0 +1,52 @@
+from flask import Flask, url_for
+from flask import request
+from flask import json
+
+from flask import Response
+from flask import jsonify
+from employee import Employee
+import names
+import sys
+
+app = Flask(__name__)
+
+@app.route("/getEmployeeList")
+def getEmployeeList():
+
+    jsonStr = " "
+    try:
+        # Initialize a employee list
+        employeeList = []
+        # create a instances for filling up employee list
+        for i in range(0,5):
+            employee = Employee(names.get_first_name(),names.get_last_name())
+            employeeList.append(employee)
+    	  #convert to json data
+        jsonStr = json.dumps([e.toJSON() for e in employeeList])
+    except:
+        print ("error ", sys.exc_info()[0])
+
+
+    return jsonStr
+
+@app.route('/')
+def api_root():
+    return 'Welcome'
+
+@app.route('/hello')
+def api_hello():
+    if 'name' in request.args:
+        return 'Hello ' + request.args['name']
+    else:
+        return 'Hello John Doe'
+
+@app.route('/articles')
+def api_articles():
+    return 'List of ' + url_for('api_articles')
+
+@app.route('/articles/<articleid>')
+def api_article(articleid):
+    return 'You are reading ' + articleid
+
+if __name__ == '__main__':
+    app.run()
