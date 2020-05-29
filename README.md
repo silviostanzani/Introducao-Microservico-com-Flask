@@ -13,25 +13,28 @@ um padrão para o desenvolvimento de aplicações web em Python, a idéia desse 
 * O Primeiro passo para desenvolvermos aplicações com Flask é instalar o framework
   * Em ambiente conda a instalação pode ser feita usando pip:
   
-  ```
-  pip install flask
-  ```
+```
+pip install flask
+```
 
 * Uma aplicação mínima em Flask precisa importar a class Flask e criar uma instância da classe flask:
   * Para isso vamos salvar o código a seguir em um arquivo chamado flaskapp.py
   
-```
-from flask import Flask
-app = Flask(__name__)
-```
+  ```
+  from flask import Flask
+  app = Flask(__name__)
+  ```
 
 * Para colocarmos essa aplicação no ar é necessário executar dois passos:
   * 1) Criar a variável de ambiente FLASK_APP e atribuir como valor o nome do arquivo criado (flaskapp)
+  
   ```
   export FLASK_APP=flaskapp
   ```
+  
   * 2) Executar o ambiente flask:
-	 ```
+  
+  ```
   flask run
   ```
   
