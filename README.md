@@ -104,3 +104,47 @@ def about():
 ```
 
 * Dessa forma se colocarmos no navegador: http://127.0.0.1:4000/sobre retornará a mensagem "Pagina sobre
+
+* Para ver a página rodando dessa forma crie o arquivo flaskapp2.py com o código acima
+* Em seguida execute
+```
+export FLASK_APP=flaskapp2
+flask run -h 0.0.0.0 -p 4000
+```
+
+* As páginas apresentadas são estátiscas, ou seja, o conteúdo já está completamente preparado antes de iniciar as requisições, mas o flask permite também executarmos páginas dinâmicas, cujo conteúdo é criado de acordo com a URL passada
+
+* O exemplo a seguir mostra como fazer uma requisição passando um nome e página retornada é uma mensagem que inclue o nome passado. Salve o código a seguir no arquivo: flaskapp3.py
+
+```
+from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'indice'
+
+@app.route('/projetos/')
+def projects():
+    return 'pagina de projetos'
+
+@app.route('/sobre')
+def about():
+    return 'Pagina sobre'
+    
+@app.route('/user/<username>')
+def profile(username):
+    return username
+```
+
+* Em seguida execute
+```
+export FLASK_APP=flaskapp3
+flask run -h 0.0.0.0 -p 4000
+```
+
+* faça uma requisicao ao seguinte endereço pelo navegador: http://127.0.0.1:4000/user/user1 e depois http://127.0.0.1:4000/user/user2
+
+* Veja que o conteúdo da página se altera de acordo com o parâmetro passado após a palavra user, isso ocorre porque no roteamento utilizamos os símbolos <> e um nome de parâmetro, esse mesmo nome de parâmetro foi passado como parâmetro para a função python profile logo abaixo do parâmetro de roteamento
+
