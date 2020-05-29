@@ -83,5 +83,24 @@ def hello_world():
 
   * Dessa forma, qualquer nó na mesma rede pode acessar o servidor pela porta 4000
   
+  O Código a seguir mostra como capturar outras chamadas URL:
   
-  
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'indice'
+
+@app.route('/projetos/')
+def projects():
+    return 'pagina de projetos'
+
+@app.route('/sobre')
+def about():
+    return 'Pagina sobre'
+
+```
+
+* Dessa forma se colocarmos no navegador: http://127.0.0.1:4000/sobre retornará a mensagem "Pagina sobre
