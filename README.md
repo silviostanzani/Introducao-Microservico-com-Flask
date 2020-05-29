@@ -50,5 +50,9 @@ pip install flask
  * Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)
  ```
  
- * Isso indica que o servidor está no ar no local host e respondendo na porta TCP 5000
- 
+* Isso indica que o servidor está no ar no local host e respondendo na porta TCP 5000. Por ser um servidor web, podemos realizar chamadas a ele por meio do navegador
+  * Essa aplicação não captura nenhuma chamada URL, dessa forma, ao chamar a aplicação pelo browser o usuário receberá um mensagem de página não encontrada
+
+* Para tratar requisições devemos incluir um controle chamado routing
+  * O Routing define um formato de URL que deve ser capturado e direciona a chamada para uma função escrita em python
+  
