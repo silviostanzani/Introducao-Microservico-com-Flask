@@ -59,15 +59,15 @@ pip install flask
 * O Código a seguir mostra como tratar requisições web:
 
 ```
-from flask import Flask, escape, request
-
+from flask import Flask
 app = Flask(__name__)
 
 @app.route('/')
-def hello():
-    name = request.args.get("name", "World")
-    return f'Hello, {escape(name)}!'
+def hello_world():
+    return 'Hello, World!'
     
 ``` 
   * O parâmetro @app.route() define qual URL será tratada pelo servidor. Nesse caso /
-  * 
+  * Ao capturar essa URL o servidor direcionará a chamada a função declarada na próxima linhas após o @app.route que é a função hello_world()
+  * Essa função tem como objetivo retornar uma string com o valor "Hello, World!"
+  * Esse retorno é direcionado como resposta ao cliente (Nesse caso um navegador) que realizou a chamada ao servidor web, portanto vai mostrar na tela do navegador a mensagem : "Hello, World!"
