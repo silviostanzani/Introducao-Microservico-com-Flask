@@ -148,3 +148,30 @@ flask run -h 0.0.0.0 -p 4000
 
 * Veja que o conteúdo da página se altera de acordo com o parâmetro passado após a palavra user, isso ocorre porque no roteamento utilizamos os símbolos <> e um nome de parâmetro, esse mesmo nome de parâmetro foi passado como parâmetro para a função python profile logo abaixo do parâmetro de roteamento
 
+* Podemos também realizar chamadas a um microserviço por meio de uma aplicação python.
+  * Para realizar uma requisição web vamos utilizar a biblioteca urllib.request (https://docs.python.org/3/library/urllib.request.html)
+  * Essa biblioteca permite realizar requisições a servidores web em python 
+  
+  * insira o código a seguir em um script chamado cliente.py
+  
+```
+import urllib.request
+
+contents = urllib.request.urlopen("http://localhost:4000/user/user2").read()
+
+print(type(contents))
+print(contents)
+```
+
+* Execute o script em outro terminal (diferente do que está executando o microserviço)
+
+```
+python cliente.py
+```
+
+* O seguinte retorno será visto no terminal
+
+```
+<class 'bytes'>
+b'user2'
+```
