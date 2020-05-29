@@ -9,5 +9,12 @@ um padrão para o desenvolvimento de aplicações web em Python, a idéia desse 
   * Iniciar um servidor web
   * Capturar as chamadas para diferentes funcionalidades de acordo com as URLs passadas
   * processas as requisições em um script python
+   
+* O Primeiro passo para desenvolvermos aplicações com Flask é instalar o framework
+  * Em ambiente conda a instalação pode ser feita usando pip:
   
+  ```
+  pip install flask
+  ```
   
+
