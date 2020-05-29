@@ -71,3 +71,17 @@ def hello_world():
   * Ao capturar essa URL o servidor direcionará a chamada a função declarada na próxima linhas após o @app.route que é a função hello_world()
   * Essa função tem como objetivo retornar uma string com o valor "Hello, World!"
   * Esse retorno é direcionado como resposta ao cliente (Nesse caso um navegador) que realizou a chamada ao servidor web, portanto vai mostrar na tela do navegador a mensagem : "Hello, World!"
+  
+* Esse servidor atenderá requisições provenientes apenas do computador onde o servidor está sendo executado, pois o ip por padrão é configurado como 127.0.0.1, a porta padrão é a 5000.
+
+* Tais parâmetros podem ser modificados para permitir que o servidor seja acessado a partir de outros nós da rede e em outras portas
+  * para isso podemos usar os parâmetros -h e -p do comando flask
+ 
+  ```
+  flask run -h 0.0.0.0 -p 4000
+  ```
+
+  * Dessa forma, qualquer nó na mesma rede pode acessar o servidor pela porta 4000
+  
+  
+  
