@@ -56,3 +56,18 @@ pip install flask
 * Para tratar requisições devemos incluir um controle chamado routing
   * O Routing define um formato de URL que deve ser capturado e direciona a chamada para uma função escrita em python
   
+* O Código a seguir mostra como tratar requisições web:
+
+```
+from flask import Flask, escape, request
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello():
+    name = request.args.get("name", "World")
+    return f'Hello, {escape(name)}!'
+    
+``` 
+  * O parâmetro @app.route() define qual URL será tratada pelo servidor. Nesse caso /
+  * 
