@@ -175,3 +175,5 @@ python cliente.py
 <class 'bytes'>
 b'user2'
 ```
+* Uma aplicação de exemplo para cadastro e busca de cliente está disponível em app.py
+* A mesma aplicação nos moldes de microserviço está disponível em app2.py e flaskapp4.py
