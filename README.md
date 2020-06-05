@@ -353,5 +353,60 @@ def salvarCompra(nomecliente, produto, quantidade):
 	
 * Json (JavaScript Object Notation): é um formato bastante flexível para determinar a forma como as aplicações se comunicam.
 
+* O código abaixo modifica a função de buscar a idade do cliente para retornar um objeto json
+```
+from flask import jsonify
 
+@app.route('/busca/<username>')
+def searchuser(username):
+	idade=0
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == username):
+				idade=l[1]	
+	return jsonify(cliente= username, idade= idade)
+```
+
+* O Cliente pode realizar o parser das informações enviadas usando a lib json conforme o código abaixo:
+```
+import json
+
+def buscarCliente():
+	nome = input("Digite o nome do cliente que deseja buscar: ")
+	
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/busca/"+nome).read()
+
+	print(contents)
+	cliente_idade = json.loads(contents)
+	print(cliente_idade['cliente'])
+	print(cliente_idade['idade'])
+```
+
+## Separando os microserviços em dois recursos:
+
+* A função para cadastrar compra foi montada em outro servidor, porém essa função realiza acesso a base de clientes também,
+para manter as bases separadas esse microserviço realiza uma chamada para o microserviço de cliente.
+* Dessa forma, as bases ficam isoladas, e os dados das bases trocados por meio de requisições json
+
+```
+@app.route('/compra/<nomecliente>/<produto>/<quantidade>')
+def salvarCompra(nomecliente, produto, quantidade):
+
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/busca/"+ nomecliente).read()
+	cliente_idade = json.loads(contents)
+
+	idade=cliente_idade['idade']
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == nomecliente):
+				idade=l[1]
+
+	file = open('compras.txt', 'a+')
+	file.write(nomecliente + ';'+ produto+ ';'+ quantidade+ ';'+ idade + '\n')
+	file.close()
+
+	return(nomecliente)
+```
 
