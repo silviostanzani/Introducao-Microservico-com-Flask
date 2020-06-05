@@ -180,9 +180,10 @@ b'user2'
 
 ## Comparando uma aplicação monolítica e uma aplicação usando microserviços
 
-* A aplicação app.py possui 3 opções:
+* A aplicação app.py possui 4 opções:
     * cadastro de cliente: nome e idade
     * busca de cliente por nome retornando a idade
+    * cadastar compra
     * sair
  
 * É uma aplicação iterativa que roda no terminal
@@ -195,7 +196,8 @@ def menu():
 	print('Opções:')
 	print('1 cadastrar cliente')
 	print('2 buscar cliente')
-	print('3 sair')
+	print('3 cadastrar compra')
+	print('4 sair')
 
 	x=input('Escolha a opção:')
 	x=int(x)
@@ -203,13 +205,15 @@ def menu():
 
 op=0
 
-while (op != 3):
+while (op != 4):
 	if (op == 1):
 		cadastrarCliente()
 	if (op == 2):
 		buscarCliente()
-
+	if (op == 3):
+		cadastrarCompra()
 	op=menu()
+
 
 ```
 
@@ -224,6 +228,12 @@ def buscarCliente():
 	nome = input("Digite o nome do cliente que deseja buscar: ")
 	idade = buscarcliente(nome)
 	print('idade ', idade)
+
+def cadastrarCompra():
+	nome = input("Digite o nome do cliente ")
+	produto = input("Digite o nome do produto ")
+	quantidade = input("Digite a quantidade comprada ")
+	salvarCompra(nome, produto, quantidade)
 ```
 
 * O Código abaixo mostra a persistência de dados
@@ -232,6 +242,21 @@ def salvarcliente(nome,idade):
 	file = open('clientes.txt', 'a+')
 	file.write(nome+ ';'+ idade + '\n')
 	file.close()
+
+def salvarCompra(nomecliente,produto,quantidade):
+
+	idade=0
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == nomecliente):
+				idade=l[1]
+
+	file = open('compras.txt', 'a+')
+	file.write(nomecliente + ';'+ produto+ ';'+ quantidade+ ';'+ idade + '\n')
+	file.close()
+
+
 
 def buscarcliente(nome):
 	idade=0
@@ -258,11 +283,64 @@ def cadastrarCliente():
 def buscarCliente():
 	nome = input("Digite o nome do cliente que deseja buscar: ")
 	
-	contents = urllib.request.urlopen("http://127.0.0.1:5000/user/"+nome).read()
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/busca/"+nome).read()
 
 	print(contents)
+
+
+def cadastrarCompra():
+	nomecliente = input("Digite o nome do cliente ")
+	produto = input("Digite o nome do produto ")
+	quantidade = input("Digite a quantidade comprada ")
+	str="http://127.0.0.1:5000/compra/"+ nomecliente +"/"+ produto +"/"+ quantidade
+	print(str)
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/compra/"+ nomecliente +"/"+ produto +"/"+ quantidade).read()
+
+	print(contents)
+
 ```
 * Essas funções agora realizam requisições para um servidor no lugar de processa a manipulação de dados localmente 
 
 
-## Manipulação de dados
+## Manipulação de dados (backend)
+
+```
+from flask import Flask
+app = Flask(__name__)
+
+@app.route('/user/<username>/<idade>')
+def adduser(username,idade):
+
+	file = open('clientes.txt', 'a+')
+	file.write(username + ';'+ idade + '\n')
+	file.close()
+	return username + " " + idade
+
+@app.route('/busca/<username>')
+def searchuser(username):
+	idade=0
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == username):
+				idade=l[1]
+	return(str(idade))
+
+@app.route('/compra/<nomecliente>/<produto>/<quantidade>')
+def salvarCompra(nomecliente, produto, quantidade):
+	#return(nomecliente)
+	#return('nomecliente')
+
+	idade=0
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == nomecliente):
+				idade=l[1]
+
+	file = open('compras.txt', 'a+')
+	file.write(nomecliente + ';'+ produto+ ';'+ quantidade+ ';'+ idade + '\n')
+	file.close()
+
+	return(nomecliente)
+```
