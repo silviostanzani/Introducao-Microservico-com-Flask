@@ -177,3 +177,12 @@ b'user2'
 ```
 * Uma aplicação de exemplo para cadastro e busca de cliente está disponível em app.py
 * A mesma aplicação nos moldes de microserviço está disponível em app2.py e flaskapp4.py
+
+## Comparando uma aplicação monolítica e uma aplicação usando microserviços
+
+* A aplicação app.py possui 3 opções:
+ * cadastro de cliente: nome e idade
+ * busca de cliente por nome retornando a idade
+ * sair
+ 
+* É uma aplicação iterativa que roda no terminal
