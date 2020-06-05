@@ -186,3 +186,80 @@ b'user2'
     * sair
  
 * É uma aplicação iterativa que roda no terminal
+
+* O código abaixo mostra a parte do menu de interação com usuário
+
+```
+
+def menu():
+	print('Opções:')
+	print('1 cadastrar cliente')
+	print('2 buscar cliente')
+	print('3 sair')
+
+	x=input('Escolha a opção:')
+	x=int(x)
+	return(x)
+
+op=0
+
+while (op != 3):
+	if (op == 1):
+		cadastrarCliente()
+	if (op == 2):
+		buscarCliente()
+
+	op=menu()
+
+```
+
+* O código abaixo mostra a parte do menu de execução das funções do menu
+```
+def cadastrarCliente():
+	nome = input("Digite o nome ")
+	idade = input("Digite a idade ")
+	salvarcliente(nome,idade)
+
+def buscarCliente():
+	nome = input("Digite o nome do cliente que deseja buscar: ")
+	idade = buscarcliente(nome)
+	print('idade ', idade)
+```
+
+* O Código abaixo mostra a persistência de dados
+```
+def salvarcliente(nome,idade):
+	file = open('clientes.txt', 'a+')
+	file.write(nome+ ';'+ idade + '\n')
+	file.close()
+
+def buscarcliente(nome):
+	idade=0
+	with open('clientes.txt') as f:
+		for line in f: 
+			l=line.split(';')
+			if (l[0] == nome):
+				idade=l[1]
+	return(idade)
+```
+
+### Separando a aplicação monolítica em microserviços
+
+* Uma forma de separar parte dessa aplicação para rodar em diferentes nós é separar a parte de interação com usuário da parte de manipulação de dados. Isso também é chamado de front-end (interação com usuário) e back-end (persistência de dados)
+
+* Nesse sentido foram criadas novas funções de manipulação de dados:
+
+```
+def cadastrarCliente():
+	nome = input("Digite o nome ")
+	idade = input("Digite a idade ")
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/user/"+nome+"/"+idade).read()
+
+def buscarCliente():
+	nome = input("Digite o nome do cliente que deseja buscar: ")
+	
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/user/"+nome).read()
+
+	print(contents)
+```
+* Essas funções agora realizam requisições para um servidor no lugar de processa a manipulação de dados localmente 
