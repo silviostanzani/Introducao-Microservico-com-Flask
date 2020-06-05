@@ -243,7 +243,7 @@ def buscarcliente(nome):
 	return(idade)
 ```
 
-### Separando a aplicação monolítica em microserviços
+## Separando a aplicação monolítica em microserviços
 
 * Uma forma de separar parte dessa aplicação para rodar em diferentes nós é separar a parte de interação com usuário da parte de manipulação de dados. Isso também é chamado de front-end (interação com usuário) e back-end (persistência de dados)
 
@@ -263,3 +263,6 @@ def buscarCliente():
 	print(contents)
 ```
 * Essas funções agora realizam requisições para um servidor no lugar de processa a manipulação de dados localmente 
+
+
+## Manipulação de dados
