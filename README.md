@@ -181,8 +181,8 @@ b'user2'
 ## Comparando uma aplicação monolítica e uma aplicação usando microserviços
 
 * A aplicação app.py possui 3 opções:
- * cadastro de cliente: nome e idade
- * busca de cliente por nome retornando a idade
- * sair
+    * cadastro de cliente: nome e idade
+    * busca de cliente por nome retornando a idade
+    * sair
  
 * É uma aplicação iterativa que roda no terminal
