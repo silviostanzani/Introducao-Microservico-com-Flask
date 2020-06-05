@@ -397,11 +397,6 @@ def salvarCompra(nomecliente, produto, quantidade):
 	cliente_idade = json.loads(contents)
 
 	idade=cliente_idade['idade']
-	with open('clientes.txt') as f:
-		for line in f: 
-			l=line.split(';')
-			if (l[0] == nomecliente):
-				idade=l[1]
 
 	file = open('compras.txt', 'a+')
 	file.write(nomecliente + ';'+ produto+ ';'+ quantidade+ ';'+ idade + '\n')
