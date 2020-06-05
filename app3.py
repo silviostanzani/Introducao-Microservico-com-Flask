@@ -1,5 +1,7 @@
 import urllib.request
 
+import json
+
 # funcoes de interação com usuario
 def cadastrarCliente():
 	nome = input("Digite o nome ")
@@ -12,7 +14,9 @@ def buscarCliente():
 	contents = urllib.request.urlopen("http://127.0.0.1:5000/busca/"+nome).read()
 
 	print(contents)
-
+	cliente_idade = json.loads(contents)
+	print(cliente_idade['cliente'])
+	print(cliente_idade['idade'])
 
 def cadastrarCompra():
 	nomecliente = input("Digite o nome do cliente ")
@@ -20,7 +24,7 @@ def cadastrarCompra():
 	quantidade = input("Digite a quantidade comprada ")
 	str="http://127.0.0.1:5000/compra/"+ nomecliente +"/"+ produto +"/"+ quantidade
 	print(str)
-	contents = urllib.request.urlopen("http://127.0.0.1:5000/compra/"+ nomecliente +"/"+ produto +"/"+ quantidade).read()
+	contents = urllib.request.urlopen("http://192.168.1.109:5000/compra/"+ nomecliente +"/"+ produto +"/"+ quantidade).read()
 
 	print(contents)
 def menu():

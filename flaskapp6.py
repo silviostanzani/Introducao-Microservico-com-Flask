@@ -1,3 +1,7 @@
+from flask import jsonify
+
+import json
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -17,14 +21,19 @@ def searchuser(username):
 			l=line.split(';')
 			if (l[0] == username):
 				idade=l[1]	
-	return(str(idade))
+	return jsonify(cliente= username, idade= idade)
+
 
 @app.route('/compra/<nomecliente>/<produto>/<quantidade>')
 def salvarCompra(nomecliente, produto, quantidade):
-	#return(nomecliente)
-	#return('nomecliente')
 
-	idade=0
+	contents = urllib.request.urlopen("http://127.0.0.1:5000/busca/"+ nomecliente).read()
+	cliente_idade = json.loads(contents)
+	
+	#print(cliente_idade['cliente'])
+	#print(cliente_idade['idade'])
+
+	idade=cliente_idade['idade']
 	with open('clientes.txt') as f:
 		for line in f: 
 			l=line.split(';')

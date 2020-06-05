@@ -1,3 +1,5 @@
+from flask import jsonify
+
 from flask import Flask
 app = Flask(__name__)
 
@@ -17,7 +19,10 @@ def searchuser(username):
 			l=line.split(';')
 			if (l[0] == username):
 				idade=l[1]	
-	return(str(idade))
+	return jsonify(cliente= username,
+                   idade= idade)
+	
+	#return(str(idade))
 
 @app.route('/compra/<nomecliente>/<produto>/<quantidade>')
 def salvarCompra(nomecliente, produto, quantidade):
