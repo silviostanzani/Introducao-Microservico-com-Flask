@@ -344,3 +344,14 @@ def salvarCompra(nomecliente, produto, quantidade):
 
 	return(nomecliente)
 ```
+
+## Usando Rest e Json
+
+* REST (Representational State Transfer): Um aplicativo Web RESTful expõe informações sobre si na forma de informações sobre seus recursos. Ele também permite que o cliente execute ações nesses recursos, como criar novos recursos (por exemplo, criar um novo usuário) ou alterar os recursos existentes (por exemplo, editar uma postagem).
+	* Um aplicativo REST é utilizado por meio de requisições HTTP e provê respostas do tipo HTML, XML ou Json
+	* É como requisitar uma URL no navegador e receber uma página HTML como resposta. A diferença é que a solicitação via REST é feita a uma aplicação e não para um arquivo estático
+	
+* Json (JavaScript Object Notation): é um formato bastante flexível para determinar a forma como as aplicações se comunicam.
+
+
+
