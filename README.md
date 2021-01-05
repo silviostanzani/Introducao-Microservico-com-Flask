@@ -1,6 +1,11 @@
 # Microserviço com Flask
 
-* Tutorial básico de microserviço usando framework Flask (https://palletsprojects.com/p/flask/)
+* Link para os vídeos desse tutorial (3 partes): 
+	* https://www.youtube.com/watch?v=jXvgWdgzv6Y&t=43s
+	* https://www.youtube.com/watch?v=pZk2-zM_M50&t=591s
+	* https://www.youtube.com/watch?v=_h17y6eHyZ0&t=8s
+
+* Material baseado no tutorial de microserviço usando framework Flask (https://palletsprojects.com/p/flask/)
 
 * O framework Flask permite criar servidores web seguindo a especificaçáo WSGI (Web Server Gateway Interface), que é
 um padrão para o desenvolvimento de aplicações web em Python, a idéia desse padrão é permitir a portabilidade de uma aplicação web em python entre diferentes servidores web atuando como um middleware.
